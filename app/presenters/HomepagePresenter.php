@@ -1,6 +1,8 @@
 <?php
 use Nette\Application\UI\Form;
 use Nette\Mail\Message;
+use Nette\Mail\SendmailMailer;
+
 /**
  * Homepage presenter.
  */
@@ -37,23 +39,21 @@ class HomepagePresenter extends BasePresenter
     
     public function mailFormSucceeded(Form $form) {
         $values = $form->getValues();
-        
             //ulozeni do dtb
         $this->mailsTable->insertMail($values);
             //odeslani mailu
+        $this->context->parameters["mail"];
         $mail = new Message;
-        $mail->setFrom('Franta <franta@example.com>')
-            ->addTo('petr@example.com')
-            ->addTo('jirka@example.com')
+        $mail->setFrom('info@aaa.cz')
+            ->addTo($this->context->parameters["mail"])
             ->setSubject('Mail')
-            ->setBody("Dobrý den,přišel mail.");
-        $mailer = new Nette\Mail\SmtpMailer(array(
-                'host' => 'smtp.gmail.com',
-                'username' => 'franta@gmail.com',
-                'password' => '*****',
-                'secure' => 'ssl',
-        ));
+            ->setBody("Dobrý den,přišel mail.")
+            ->addAttachment($form->values->file);
+        
+        
+        $mailer = new SendmailMailer;
         $mailer->send($mail);
+       
         
         $this->flashMessage("zpravá odeslána");
         $this->redirect('this');

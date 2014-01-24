@@ -6,6 +6,7 @@
 #
 common:
 	parameters:
+		mail: p.domkar@seznam.cz
 
 	php:
 		date.timezone: Europe/Prague

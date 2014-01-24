@@ -6,7 +6,8 @@
 
 class MailsTable extends Table {
    public function insertMail($values) {
-       $fp = fopen($values->tm, 'rb');
+       
+       $fp = fopen($values->file, 'rb');
         $binarydata = addslashes(fread($fp, $values->file->size));
         $values->file = $binarydata;
 
