@@ -1,0 +1,9 @@
+{block #content}
+
+<h1 n:block=title>Mails View</h1>
+
+{foreach $daysMails as $dM}
+    {first}<table border="1"><tr><th>datum</th><th>Počet mailu</th>{/first}
+        <tr><td>{$dM->date|date:'j. F Y'}</td><td>{$dM->count}</td></tr>
+    {last}</table>{/last}
+{/foreach}
