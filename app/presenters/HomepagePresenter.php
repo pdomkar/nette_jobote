@@ -45,8 +45,8 @@ class HomepagePresenter extends BasePresenter
         $mail->setFrom('Franta <franta@example.com>')
             ->addTo('petr@example.com')
             ->addTo('jirka@example.com')
-            ->setSubject('Potvrzení objednávky')
-            ->setBody("Dobrý den,\nvaše objednávka byla přijata.");
+            ->setSubject('Mail')
+            ->setBody("Dobrý den,přišel mail.");
         $mailer = new Nette\Mail\SmtpMailer(array(
                 'host' => 'smtp.gmail.com',
                 'username' => 'franta@gmail.com',
